@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "reimagining-onboarding",
+    "title": "Reimagining Onboarding",
+    "teaser": "Turning a 47-step signup into something humans actually finish.",
+    "locked": false
+  },
+  {
+    "slug": "design-system-at-scale",
+    "title": "Design System at Scale",
+    "teaser": "Building and governing a system used by 200+ designers and engineers.",
+    "locked": true
+  },
+  {
+    "slug": "ai-native-workflows",
+    "title": "AI-Native Workflows",
+    "teaser": "Designing for a world where the AI does the first draft.",
+    "locked": true
+  },
+  {
+    "slug": "accessibility-retrofit",
+    "title": "Accessibility Retrofit",
+    "teaser": "Making a decade-old product meet WCAG AA without a rewrite.",
+    "locked": true
+  }
+]

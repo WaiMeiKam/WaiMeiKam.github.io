@@ -1,0 +1,78 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--semantic-background);
+  color: var(--semantic-text);
+  font-family: var(--app-font-family, var(--font-family-body));
+}
+
+/* Keep the toggle feeling satisfying without forcing motion. */
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition: background-color 400ms ease, color 250ms ease;
+  }
+}
+
+html[data-ux-mode="bad"] {
+  --semantic-background: var(--badUx-background);
+  --semantic-surface: color-mix(in srgb, var(--badUx-background) 55%, black 45%);
+  --semantic-text: var(--badUx-text);
+  --semantic-heading: var(--badUx-accent);
+  --semantic-primary: var(--badUx-primary);
+  --semantic-accent: var(--badUx-accent);
+  --semantic-glow: var(--badUx-accent);
+
+  --app-font-family: var(--font-family-badUx);
+}
+
+html[data-ux-mode="bad"] body {
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+@keyframes kimsWorldMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes kimsWorldWobble {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(2px) rotate(1deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="switch"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--semantic-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+

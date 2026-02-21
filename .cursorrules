@@ -1,0 +1,151 @@
+# Kim's World — Cursor Rules
+
+Guidance for AI agents (Cursor, Claude, Copilot) working with this codebase. Written in friendly Australian English.
+
+---
+
+## Project Overview
+
+**Kim's World** is a portfolio site for Kim, a Principal Product Designer. It's built with:
+
+- **Next.js 15** (App Router)
+- **React 19**
+- **Tailwind CSS v4**
+- **Framer Motion**
+- **TypeScript**
+
+The design draws on a Peranakan-inspired warm palette with a campfire visual concept. A standout feature is the **Good UX / Bad UX toggle** — flipping it transforms the entire site from a polished, crafted experience into an intentionally terrible one (and back again).
+
+---
+
+## Design Token System
+
+The design token system is the single source of truth for styling.
+
+- **Source of truth:** `tokens/tokens.json` (W3C DTCG format)
+- Every token has `$value`, `$type`, and `$description`
+- **After editing tokens**, run `npm run build:tokens` (which runs `node tokens/build.mjs`)
+- This generates `app/globals.css` with CSS custom properties and a Tailwind `@theme` block
+- **NEVER edit `app/globals.css` directly** — always edit `tokens/tokens.json` and rebuild
+- Token groups: `color`, `semantic`, `badUx`, `font` (family, size, weight), `spacing`, `radius`, `shadow`
+
+---
+
+## Folder Structure
+
+```
+kims-world/
+  app/                          # Next.js App Router pages
+    page.tsx                    # Homepage hub
+    layout.tsx                  # Root layout with providers
+    globals.css                 # GENERATED — do not edit directly
+    get-to-know-kim/page.tsx    # Polls game
+    thinking-about/page.tsx     # Article listing
+    thinking-about/[slug]/page.tsx  # Individual article
+    noodling-on/page.tsx        # FigJam-style pannable canvas
+    tinkered-and-delivered/page.tsx  # Project listing
+    tinkered-and-delivered/[slug]/page.tsx  # Case study
+  components/
+    ui/                         # Primitives (Button, Card, NavCard, etc.)
+    features/                   # Feature components (PollGame, UXToggle, etc.)
+    illustrations/              # IllustrationSpot wrapper component
+  content/
+    articles/                   # MDX storybook articles
+    projects/                   # MDX case study files
+    polls.json                  # Poll questions and Kim's answers
+    noodling.json               # Noodling-on cards data
+    projects.json               # Project manifest (locked/unlocked flags)
+  tokens/
+    tokens.json                 # W3C DTCG design tokens (SOURCE OF TRUTH)
+    build.mjs                   # Style Dictionary build script
+  lib/
+    hooks/                      # useAudio, useUXMode, useScrollReveal
+    utils/                      # Helpers
+  public/
+    illustrations/              # Drop zone for Procreate exports
+    audio/                      # Ambient tracks
+```
+
+---
+
+## Component Conventions
+
+- **UI primitives** go in `components/ui/` — one component per file, named PascalCase (e.g. `Button.tsx`, `Card.tsx`, `NavCard.tsx`)
+- **Feature components** go in `components/features/` (e.g. `PollGame.tsx`, `UXToggle.tsx`)
+- Use Tailwind utility classes with CSS custom properties from the token system (e.g. `bg-[var(--color-cream)]` or `text-[var(--semantic-text)]`)
+- All components should be **React Server Components by default**; add `"use client"` only when needed (interactivity, hooks, browser APIs)
+- Use Framer Motion for animations; **always respect `prefers-reduced-motion`**
+
+---
+
+## The UX Toggle System
+
+- A React context provider (`useUXMode`) wraps the app and exposes `mode` (`"good"` | `"bad"`) and `toggleMode()`
+- **Good UX mode:** the warm, crafted default experience
+- **Bad UX mode:** intentionally terrible UX (Comic Sans, neon colours, popups, autoplay audio)
+- Bad UX components are separate files in `components/features/bad-ux/` — mounted/unmounted by context
+- Bad UX uses token values from the `badUx` group in `tokens.json`
+- The toggle transition should be smooth and satisfying
+
+---
+
+## Illustration Placeholder System
+
+- `IllustrationSpot` component lives in `components/illustrations/`
+- Takes a `name` prop (e.g. `"hero-campfire"`, `"poll-reaction-yes"`)
+- Renders a soft gradient shimmer placeholder until the real asset exists at `/public/illustrations/{name}.png` (or `.gif`, `.apng`)
+- No code changes needed to swap in final art — just drop the file in place
+
+---
+
+## Content File Formats
+
+| File / Type | Format |
+|-------------|--------|
+| **polls.json** | Array of objects: `{ id, question, optionA, optionB, kimsAnswer: "a"\|"b", quip }` |
+| **noodling.json** | Array of objects positioned on a FigJam-style canvas. Common fields: `{ id, type, x, y, rotation, tags }`. Types: `"sticky"` adds `content, color` (Peranakan palette name); `"image"` adds `title, thumbnail, link, width?`; `"video"` adds `title, thumbnail, link, width?`; `"link"` adds `title, thumbnail, link`; `"embed"` adds `title, embedUrl, width?` |
+| **projects.json** | Array of objects: `{ slug, title, teaser, locked: boolean }` |
+| **Articles** | MDX files in `content/articles/` with frontmatter: `title, date, teaser, tags` |
+| **Case studies** | MDX files in `content/projects/` with frontmatter: `title, role, timeline, company, tags` |
+
+---
+
+## How to Add Content
+
+| Content type | How to add |
+|--------------|------------|
+| **New poll** | Add an object to `content/polls.json` |
+| **New article** | Create an MDX file in `content/articles/` with the required frontmatter |
+| **New noodling card** | Add an object to `content/noodling.json` with `x, y, rotation` for canvas placement. Use type `"sticky"` for short thoughts or `"image"/"video"/"link"/"embed"` for media cards. Optionally add a thumbnail illustration |
+| **New project** | Add to `content/projects.json`. If `locked: false`, also create an MDX file in `content/projects/` |
+| **New illustration** | Export from Procreate and drop into `public/illustrations/` with the matching name |
+
+---
+
+## Naming Conventions
+
+- **Files:** kebab-case for content and routes, PascalCase for components
+- **CSS variables:** `--{group}-{name}` (e.g. `--color-jade`, `--semantic-primary`, `--font-size-base`)
+- **Illustration slots:** kebab-case descriptive names (e.g. `hero-campfire`, `poll-pineapple`, `noodling-laksa`)
+
+---
+
+## Accessibility Requirements
+
+- Semantic HTML (proper headings, landmarks, lists)
+- ARIA labels on interactive elements
+- Keyboard navigation for all interactive elements
+- `prefers-reduced-motion` disables all animations
+- WCAG AA colour contrast for all text/background combinations
+- Visible, styled focus indicators
+
+---
+
+## Key Dependencies
+
+- Next.js 15 (App Router)
+- React 19
+- Tailwind CSS v4
+- Framer Motion 11
+- TypeScript 5.7
+- Custom token build script (`tokens/build.mjs`, build-time only)

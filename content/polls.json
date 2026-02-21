@@ -1,0 +1,66 @@
+[
+  {
+    "id": "pineapple-pizza",
+    "question": "Pineapple on pizza?",
+    "optionA": "Yes",
+    "optionB": "Absolutely not",
+    "kimsAnswer": "a",
+    "quip": "I'm on the right side of history."
+  },
+  {
+    "id": "dark-light-mode",
+    "question": "Dark mode or light mode?",
+    "optionA": "Dark mode",
+    "optionB": "Light mode",
+    "kimsAnswer": "a",
+    "quip": "Dark mode all the way."
+  },
+  {
+    "id": "tabs-spaces",
+    "question": "Tabs or spaces?",
+    "optionA": "Tabs",
+    "optionB": "Spaces",
+    "kimsAnswer": "b",
+    "quip": "Spaces. Fight me."
+  },
+  {
+    "id": "laksa-pho",
+    "question": "Laksa or pho?",
+    "optionA": "Laksa",
+    "optionB": "Pho",
+    "kimsAnswer": "a",
+    "quip": "Peranakan pride, baby."
+  },
+  {
+    "id": "morning-night",
+    "question": "Morning person or night owl?",
+    "optionA": "Morning person",
+    "optionB": "Night owl",
+    "kimsAnswer": "b",
+    "quip": "My best ideas happen after midnight."
+  },
+  {
+    "id": "design-systems",
+    "question": "Design systems: love or overrated?",
+    "optionA": "Love them",
+    "optionB": "Overrated",
+    "kimsAnswer": "a",
+    "quip": "Total design systems nerd here."
+  },
+  {
+    "id": "remote-office",
+    "question": "Remote or office?",
+    "optionA": "Remote all the way",
+    "optionB": "Give me the office",
+    "kimsAnswer": "a",
+    "quip": "My couch, my rules, my laksa for lunch."
+  },
+  {
+    "id": "figma-sketch",
+    "question": "Start in Figma or on paper?",
+    "optionA": "Figma",
+    "optionB": "Paper first",
+    "kimsAnswer": "b",
+    "quip": "Pen and paper keeps me honest before pixels distract me."
+  }
+]

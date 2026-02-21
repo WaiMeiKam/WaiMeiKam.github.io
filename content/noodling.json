@@ -1,0 +1,109 @@
+[
+  {
+    "id": "laksa-illustration",
+    "type": "sticky",
+    "content": "Drawing laksa from memory. Got the noodles wrong three times.",
+    "color": "rosepink",
+    "x": 120,
+    "y": 340,
+    "rotation": -3,
+    "tags": ["food", "procreate"]
+  },
+  {
+    "id": "design-system-talk",
+    "type": "video",
+    "title": "Why your design system needs a therapist",
+    "thumbnail": "noodling-ds-talk",
+    "link": "https://youtube.com/...",
+    "x": 480,
+    "y": 200,
+    "rotation": 1.5,
+    "width": 280,
+    "tags": ["design-systems", "talk"]
+  },
+  {
+    "id": "boring-ux-thought",
+    "type": "sticky",
+    "content": "Hot take: the best UX is boring UX.",
+    "color": "gold",
+    "x": 800,
+    "y": 420,
+    "rotation": 2,
+    "tags": ["design"]
+  },
+  {
+    "id": "spotify-playlist",
+    "type": "embed",
+    "title": "Current coding playlist",
+    "embedUrl": "https://open.spotify.com/embed/...",
+    "x": 300,
+    "y": 600,
+    "rotation": -1,
+    "tags": ["music"]
+  },
+  {
+    "id": "peranakan-tiles",
+    "type": "image",
+    "title": "Peranakan tile patterns in CSS",
+    "thumbnail": "noodling-tiles",
+    "link": null,
+    "x": 650,
+    "y": 80,
+    "rotation": -2,
+    "width": 240,
+    "tags": ["css", "culture", "experiment"]
+  },
+  {
+    "id": "lofi-beats",
+    "type": "link",
+    "title": "Lo-fi beats for deep work",
+    "thumbnail": "noodling-lofi",
+    "link": "#",
+    "x": 950,
+    "y": 550,
+    "rotation": 1,
+    "tags": ["music", "productivity"]
+  },
+  {
+    "id": "nasi-lemak-sketch",
+    "type": "sticky",
+    "content": "Attempted nasi lemak in Procreate. The sambal looks angry. It should.",
+    "color": "blush",
+    "x": 1100,
+    "y": 280,
+    "rotation": -1.5,
+    "tags": ["food", "procreate"]
+  },
+  {
+    "id": "ux-toggle-idea",
+    "type": "sticky",
+    "content": "What if a portfolio could teach UX by showing the bad version? ...brb building it.",
+    "color": "jade",
+    "x": 50,
+    "y": 600,
+    "rotation": 2.5,
+    "tags": ["design", "meta"]
+  },
+  {
+    "id": "char-kway-teow",
+    "type": "image",
+    "title": "Char kway teow colour study",
+    "thumbnail": "noodling-ckt",
+    "link": null,
+    "x": 750,
+    "y": 650,
+    "rotation": -2.5,
+    "width": 220,
+    "tags": ["food", "procreate", "culture"]
+  },
+  {
+    "id": "progressive-disclosure-thought",
+    "type": "sticky",
+    "content": "The homepage should feel like arriving at a campfire. Calm first, then stories.",
+    "color": "gold",
+    "x": 400,
+    "y": 450,
+    "rotation": 1,
+    "tags": ["design", "philosophy"]
+  }
+]

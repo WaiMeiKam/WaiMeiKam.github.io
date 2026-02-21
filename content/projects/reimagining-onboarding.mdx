@@ -1,0 +1,74 @@
+---
+title: "Reimagining Onboarding"
+role: "Principal Product Designer"
+timeline: "6 months"
+company: "A Series C fintech startup"
+tags: ["product design", "onboarding", "conversion", "user research"]
+---
+
+<Problem>
+
+The company's sign-up flow had 47 discrete steps spread across 12 screens. Completion rates sat at 23%, and the customer acquisition cost was blowing out the unit economics. The business was pouring money into the top of the funnel, but most of it leaked out before people ever reached the product.
+
+The existing flow had accumulated complexity over three years — each step added by a different team with a reasonable justification at the time. Compliance needed identity verification. Growth wanted referral codes. Product wanted preference settings. Nobody had looked at the whole thing end-to-end.
+
+</Problem>
+
+<Process>
+
+### Research phase
+
+I started by mapping every step in the existing flow, tagging each with its origin team, business requirement, and regulatory necessity. Of the 47 steps, only 11 were legally required at sign-up time. The rest were "nice to haves" that had been promoted to "must haves" by institutional memory.
+
+I ran unmoderated usability tests with 30 participants across three cohorts. The consistent finding: people didn't abandon at one specific step — they experienced cumulative fatigue. The seventh, eighth, ninth question felt like an interrogation, not an onboarding.
+
+### Design approach
+
+Instead of trimming individual steps, I restructured the architecture:
+
+1. **Sign-up in 4 steps**: Name, email, password, verify phone. You're in.
+2. **Progressive profiling**: The 36 non-essential questions became contextual prompts that appeared at the moment they were relevant — when you first make a transfer, we ask about your preferences. When you hit a threshold, we handle compliance.
+3. **The "trust ramp"**: Each interaction earned a capability. Complete identity verification? Unlock higher limits. Add a bank account? Unlock instant transfers. The product taught itself to you through progressive disclosure.
+
+### Prototyping and testing
+
+I built three prototype variants and tested them against the existing flow:
+
+- **Variant A**: Minimal sign-up (4 steps) with aggressive progressive profiling
+- **Variant B**: Moderate sign-up (8 steps) with gentle progressive profiling
+- **Variant C**: The existing 47-step flow with better copy and UI polish
+
+Variant A won decisively. But the compliance team had concerns about fraud risk with minimal upfront verification. We negotiated: the sign-up would collect only what's needed, but progressive profiling would be mandatory (not dismissible) for certain regulated actions.
+
+</Process>
+
+<KeyDecision title="Deferring vs. removing">
+
+The hardest conversation wasn't about UX — it was about organisational politics. Three teams had "essential" onboarding steps. Removing them felt like an attack on their feature's importance.
+
+The reframe that worked: *"We're not removing your step. We're moving it to the moment where it has the highest completion rate and the most context."* This turned adversaries into advocates.
+
+</KeyDecision>
+
+<Outcome>
+
+After a phased rollout over 8 weeks:
+
+- **Sign-up completion rate**: 23% → 68% (a 3× improvement)
+- **Time to first value action**: 12 minutes → 3 minutes
+- **30-day retention**: +18% (people who completed faster were more likely to stay)
+- **Compliance completion rate**: Actually improved from 71% to 89% — asking for documents in context motivated people far more than asking during sign-up
+
+The progressive profiling approach also gave the data science team richer signals. When someone fills in preferences because they're about to use a feature, the data is higher quality than when they rush through it during sign-up.
+
+</Outcome>
+
+<Reflection>
+
+This project reinforced something I keep coming back to: the best design work is often about removing things, and the hardest part of removing things is the conversation, not the design.
+
+The 47-step flow wasn't a design failure — it was an organisational one. Each step was reasonable in isolation. The system had no forcing function to evaluate the whole. That's where a principal designer can add the most value: holding the end-to-end view when everyone else is optimising their slice.
+
+If I were doing this again, I'd invest more time upfront in building a shared model of the flow with all stakeholders — a service blueprint that made the cumulative weight visible before we started debating individual steps.
+
+</Reflection>
