@@ -7,6 +7,7 @@ import * as React from "react";
 import { UXToggle } from "@/components/features/UXToggle";
 import { cx } from "@/lib/utils/cx";
 import { useUXMode } from "@/lib/hooks/useUXMode";
+import { useIntro } from "@/lib/context/IntroContext";
 
 const LINKS = [
   { href: "/get-to-know-kim", label: "Get to Know Kim", icon: "❓" },
@@ -18,7 +19,10 @@ const LINKS = [
 export function NavBar() {
   const pathname = usePathname();
   const { mode } = useUXMode();
+  const { introActive } = useIntro();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  if (introActive) return null;
 
   React.useEffect(() => {
     setMobileOpen(false);
@@ -88,9 +92,11 @@ export function NavBar() {
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link
           href="/"
-          className="text-sm font-semibold tracking-tight text-[var(--semantic-heading)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--semantic-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--semantic-background)] rounded"
+          className="inline-flex items-center gap-2 rounded outline-none focus-visible:ring-2 focus-visible:ring-[var(--semantic-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--semantic-background)]"
         >
-          Kim&rsquo;s World
+          <span className="text-sm font-semibold tracking-tight text-[var(--semantic-heading)]">
+            Kim&rsquo;s World
+          </span>
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 sm:flex">

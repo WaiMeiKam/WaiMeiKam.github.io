@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-    --color-jade: var(--color-jade);
-    --color-rosepink: var(--color-rosepink);
-    --color-emerald: var(--color-emerald);
+    --color-ember: var(--color-ember);
+    --color-flame: var(--color-flame);
+    --color-coal: var(--color-coal);
     --color-gold: var(--color-gold);
     --color-cream: var(--color-cream);
-    --color-charcoal: var(--color-charcoal);
-    --color-blush: var(--color-blush);
+    --color-ash: var(--color-ash);
+    --color-dusk: var(--color-dusk);
     --semantic-primary: var(--semantic-primary);
     --semantic-accent: var(--semantic-accent);
     --semantic-background: var(--semantic-background);
@@ -23,44 +23,22 @@
     --font-family-body: var(--font-family-body);
     --font-family-heading: var(--font-family-heading);
     --font-family-badUx: var(--font-family-badUx);
-    --font-weight-normal: var(--font-weight-normal);
-    --font-weight-medium: var(--font-weight-medium);
-    --font-weight-semibold: var(--font-weight-semibold);
-    --font-weight-bold: var(--font-weight-bold);
-    --font-size-xs: var(--font-size-xs);
-    --font-size-sm: var(--font-size-sm);
-    --font-size-base: var(--font-size-base);
-    --font-size-lg: var(--font-size-lg);
-    --font-size-xl: var(--font-size-xl);
-    --font-size-2xl: var(--font-size-2xl);
-    --font-size-3xl: var(--font-size-3xl);
-    --font-size-4xl: var(--font-size-4xl);
-    --font-size-5xl: var(--font-size-5xl);
-    --radius-sm: var(--radius-sm);
-    --radius-md: var(--radius-md);
-    --radius-lg: var(--radius-lg);
-    --radius-full: var(--radius-full);
-
-    --shadow-sm: var(--shadow-sm);
-    --shadow-md: var(--shadow-md);
-    --shadow-lg: var(--shadow-lg);
-    --shadow-glow: var(--shadow-glow);
 }
 
 :root {
-  --color-jade: #2A9D8F;
-  --color-rosepink: #E76F51;
-  --color-emerald: #264653;
+  --color-ember: #D4590A;
+  --color-flame: #E76F51;
+  --color-coal: #1C0A02;
   --color-gold: #E9C46A;
   --color-cream: #FFF8F0;
-  --color-charcoal: #2B2D42;
-  --color-blush: #FFDDD2;
-  --semantic-primary: #2A9D8F;
+  --color-ash: #2C1810;
+  --color-dusk: #FDEBD0;
+  --semantic-primary: #D4590A;
   --semantic-accent: #E76F51;
   --semantic-background: #FFF8F0;
-  --semantic-surface: #FFDDD2;
-  --semantic-text: #2B2D42;
-  --semantic-heading: #264653;
+  --semantic-surface: #FDEBD0;
+  --semantic-text: #2C1810;
+  --semantic-heading: #1C0A02;
   --semantic-glow: #E9C46A;
   --badUx-background: #FF00FF;
   --badUx-text: #00FF00;

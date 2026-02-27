@@ -66,16 +66,16 @@ function themeLines(tokens) {
     .join("\n");
 }
 
+// Only colour and font-family tokens go into @theme — these add new named
+// entries to Tailwind's palette (e.g. bg-ember, text-coal) without conflicting
+// with Tailwind v4's built-in spacing/sizing scale names (xs, sm, md, lg, xl…).
+// Dimension, fontWeight, and shadow tokens live in :root only.
 const css = `@import "tailwindcss";
 
 @theme {
 ${themeLines(colorTokens)}
 
 ${themeLines(fontFamilyTokens)}
-${themeLines(fontWeightTokens)}
-${themeLines(dimensionTokens)}
-
-${themeLines(shadowTokens)}
 }
 
 :root {

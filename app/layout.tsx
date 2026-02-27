@@ -4,6 +4,7 @@ import "./ux-mode.css";
 
 import { UXModeProvider } from "@/lib/hooks/useUXMode";
 import { AudioProvider } from "@/lib/hooks/useAudio";
+import { IntroProvider } from "@/lib/context/IntroContext";
 import { BadUxLayer } from "@/components/features/bad-ux/BadUxLayer";
 import { PageTransition } from "@/components/features/PageTransition";
 import { NavBar } from "@/components/ui/NavBar";
@@ -39,6 +40,10 @@ export const metadata: Metadata = {
       "A cosy little hub for my work, thoughts, and whatever I'm noodling on lately.",
     images: ["/og-image.png"],
   },
+  icons: {
+    icon: "/illustrations/origin-scene-01.png",
+    shortcut: "/illustrations/origin-scene-01.png",
+  },
   robots: {
     index: true,
     follow: true,
@@ -55,15 +60,17 @@ export default function RootLayout({
       <body className="antialiased">
         <UXModeProvider>
           <AudioProvider src="/audio/ambient.mp3">
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-[var(--radius-md)] focus:bg-[var(--semantic-primary)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
-            >
-              Skip to main content
-            </a>
-            <NavBar />
-            <PageTransition>{children}</PageTransition>
-            <BadUxLayer />
+            <IntroProvider>
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-[var(--radius-md)] focus:bg-[var(--semantic-primary)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+              >
+                Skip to main content
+              </a>
+              <NavBar />
+              <PageTransition>{children}</PageTransition>
+              <BadUxLayer />
+            </IntroProvider>
           </AudioProvider>
         </UXModeProvider>
       </body>

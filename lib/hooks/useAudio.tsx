@@ -7,6 +7,7 @@ type AudioContextValue = {
   toggle: () => void;
   volume: number;
   setVolume: (v: number) => void;
+  audioAvailable: boolean;
 };
 
 const AudioContext = React.createContext<AudioContextValue | null>(null);
@@ -43,6 +44,7 @@ export function AudioProvider({
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [volume, setVolumeState] = React.useState(DEFAULT_VOLUME);
+  const [audioAvailable, setAudioAvailable] = React.useState(true);
 
   React.useEffect(() => {
     setVolumeState(readStoredVolume());
@@ -57,13 +59,23 @@ export function AudioProvider({
 
     const handlePause = () => setIsPlaying(false);
     const handlePlay = () => setIsPlaying(true);
+    const handleError = () => {
+      setAudioAvailable(false);
+      setIsPlaying(false);
+    };
+    const handleCanPlay = () => setAudioAvailable(true);
+
     audio.addEventListener("pause", handlePause);
     audio.addEventListener("play", handlePlay);
+    audio.addEventListener("error", handleError);
+    audio.addEventListener("canplay", handleCanPlay);
 
     return () => {
       audio.pause();
       audio.removeEventListener("pause", handlePause);
       audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("error", handleError);
+      audio.removeEventListener("canplay", handleCanPlay);
       audioRef.current = null;
     };
     // Only re-create when src changes, not on volume change
@@ -96,8 +108,8 @@ export function AudioProvider({
   }, []);
 
   const value = React.useMemo<AudioContextValue>(
-    () => ({ isPlaying, toggle, volume, setVolume }),
-    [isPlaying, toggle, volume, setVolume],
+    () => ({ isPlaying, toggle, volume, setVolume, audioAvailable }),
+    [isPlaying, toggle, volume, setVolume, audioAvailable],
   );
 
   return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>;

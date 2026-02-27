@@ -26,30 +26,43 @@ export function NavCard({ href, title, subtitle, eyebrow, className }: NavCardPr
       )}
     >
       <motion.div
+        className="rounded-[var(--radius-lg)] overflow-hidden"
         whileHover={
           reduceMotion
             ? undefined
-            : { y: -4, scale: 1.015, boxShadow: "0 0 40px 14px rgba(233,196,106,0.35)" }
+            : {
+                y: -3,
+                boxShadow:
+                  "0 10px 28px -6px rgba(38,70,83,0.16), 0 0 0 1.5px rgba(233,196,106,0.35)",
+              }
         }
-        whileTap={reduceMotion ? undefined : { scale: 0.985 }}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 380, damping: 28 }}
       >
         <Card
-          className={cx(
-            "h-full transition-[box-shadow,ring-color] duration-200",
-            "group-hover:ring-1 group-hover:ring-[var(--semantic-glow)]/30",
-          )}
+          style={{ backgroundColor: "white" }}
+          className="h-full ring-1 ring-black/[0.06] shadow-[0_1px_3px_0_rgba(0,0,0,0.06)]"
         >
           <CardHeader className="pb-6">
-            {eyebrow ? (
-              <p className="text-xs font-semibold uppercase tracking-wide opacity-60">
-                {eyebrow}
-              </p>
-            ) : null}
-            <CardTitle className="text-base sm:text-lg transition-colors duration-200 group-hover:text-[var(--semantic-primary)]">
-              {title}
-            </CardTitle>
-            {subtitle ? <CardDescription>{subtitle}</CardDescription> : null}
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                {eyebrow ? (
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-wide opacity-50">
+                    {eyebrow}
+                  </p>
+                ) : null}
+                <CardTitle className="text-base sm:text-lg transition-colors duration-200 group-hover:text-[var(--semantic-primary)]">
+                  {title}
+                </CardTitle>
+                {subtitle ? <CardDescription>{subtitle}</CardDescription> : null}
+              </div>
+              <span
+                className="mt-0.5 shrink-0 text-base text-[var(--semantic-heading)] opacity-25 transition-all duration-300 group-hover:opacity-60 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                →
+              </span>
+            </div>
           </CardHeader>
         </Card>
       </motion.div>
