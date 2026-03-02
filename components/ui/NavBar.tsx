@@ -22,8 +22,6 @@ export function NavBar() {
   const { introActive } = useIntro();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  if (introActive) return null;
-
   React.useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
@@ -36,6 +34,8 @@ export function NavBar() {
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [mobileOpen]);
+
+  if (introActive) return null;
 
   if (mode === "bad") {
     return (
