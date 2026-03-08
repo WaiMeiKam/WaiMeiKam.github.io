@@ -1,0 +1,52 @@
+# Kim's World — Portfolio of Kimberley Kam
+
+> Kimberley Kam is a Principal Product Designer and Design Strategist based in Melbourne, Australia.
+> Available for in-house roles and consulting engagements. Remote-friendly.
+
+Kimberley Kam (Kim) is a Principal Product Designer and Design Strategist with deep experience
+shipping products at scale. She works across AI product design, design systems, product strategy,
+UX design, and design leadership. Kim's work sits at the intersection of systems thinking, visual
+storytelling, and product rigour — from 0-to-1 product work through to mature design operations.
+
+She is currently open to new opportunities: Principal Product Designer, Design Strategist,
+Head of Design, Product Designer (AI), or senior IC/leadership roles where design and strategy
+intersect. Remote-friendly from Melbourne, Australia.
+
+LinkedIn: https://www.linkedin.com/in/kimberley-kam/
+Contact: hello@kimsworld.com
+
+## Expertise
+
+- AI Product Design — designing products where AI is a core experience, not a feature bolt-on
+- Design Strategy — translating ambiguous business problems into design direction and roadmap
+- Product Design — end-to-end product design from discovery through to delivery at scale
+- Design Systems — building token-based, component-driven systems that scale across teams
+- UX Design — interaction design, information architecture, usability, user research
+- Systems Thinking — designing for complexity: cross-surface, multi-stakeholder, long-horizon
+- Product Strategy — working at the intersection of user needs, business goals, and technical feasibility
+- Design Leadership — leading design teams, setting design culture, stakeholder communication
+- Product Ownership — bridging design and product management, backlog ownership, prioritisation
+- UX Writing — content strategy, microcopy, tone of voice systems
+- Accessibility — WCAG AA compliance, inclusive design, assistive technology testing
+- Design Operations — tooling, process, rituals, and infrastructure that make design teams effective
+
+## Articles (Thinking About)
+
+- [The Case for Boring UX](https://kimsworld.com/thinking-about/the-case-for-boring-ux/): The best UX is invisible — why "boring" is a compliment and delight is dessert, not the main course.
+- [The Overcooked Problem](https://kimsworld.com/thinking-about/ai-overcooked/): AI is making teams produce faster than they can verify — and quality is burning. The real cost of AI fatigue no one admits.
+- [Good UX vs Bad UX — Interactive Demo](https://kimsworld.com/thinking-about/good-ux-bad-ux-demo/): A hands-on interactive demo showing the difference between design that respects users and design that frustrates them.
+- [AI-Native Product Design](https://kimsworld.com/thinking-about/ai-native-product-design/): What it means to design products where AI is not a feature bolt-on but a core part of the experience.
+
+## Case Studies (Tinkered & Delivered)
+
+<!-- Case studies are added here as they are published. -->
+
+## About
+
+- [Get to Know Kim](https://kimsworld.com/get-to-know-kim/): An interactive game of opinion polls — pick your side and see how your design instincts compare to Kim's.
+- [What I'm Noodling On](https://kimsworld.com/noodling-on/): A FigJam-style canvas of works-in-progress, ideas, and live experiments.
+- [Kim's World](https://kimsworld.com/): Portfolio home — a campfire-aesthetic hub for Kim's work, thinking, and creative experiments.
+
+## Contact
+
+To reach Kim: hello@kimsworld.com

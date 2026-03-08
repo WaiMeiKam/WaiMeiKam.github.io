@@ -1,0 +1,54 @@
+---
+description: Design token rules for Kim's World — W3C DTCG format, build pipeline, token groups, and the no-naked-values rule.
+globs: ["tokens/**"]
+alwaysApply: false
+---
+
+# Token Rules
+
+## The Pipeline
+
+```
+tokens/tokens.json  →  npm run build:tokens  →  app/globals.css
+```
+
+- `tokens/tokens.json` is the **only** source of truth
+- `tokens/build.mjs` runs Style Dictionary to generate CSS custom properties + Tailwind `@theme` block
+- `app/globals.css` is **generated output — NEVER edit it directly**
+- Run `npm run build:tokens` after any change to `tokens.json`
+
+## W3C DTCG Format
+
+Every token must have `$value`, `$type`, and `$description`:
+
+```json
+"cream": {
+  "$value": "#f5e6d0",
+  "$type": "color",
+  "$description": "Warm background — primary surface colour"
+}
+```
+
+## Token Groups
+
+| Group | Purpose | Example variable |
+|-------|---------|-----------------|
+| `color` | Raw palette values | `--color-cream`, `--color-jade` |
+| `semantic` | Role-based aliases | `--semantic-primary`, `--semantic-text` |
+| `badUx` | Bad UX mode overrides | `--bad-ux-background` |
+| `font` | Family, size, weight | `--font-size-base`, `--font-weight-bold` |
+| `spacing` | Layout and padding | `--spacing-sm`, `--spacing-lg` |
+| `radius` | Border radius | `--radius-sm`, `--radius-full` |
+| `shadow` | Box shadows | `--shadow-card`, `--shadow-elevated` |
+
+## The No-Naked-Values Rule
+
+```tsx
+// Correct
+className="bg-[var(--color-cream)] p-[var(--spacing-md)] rounded-[var(--radius-sm)]"
+
+// Wrong — naked values
+className="bg-[#f5e6d0] p-4 rounded-lg"
+```
+
+If a value you need doesn't exist as a token, add it to `tokens.json` and rebuild — don't hardcode it.

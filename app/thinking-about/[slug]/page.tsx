@@ -23,6 +23,16 @@ export async function generateMetadata({
   return {
     title: `${article.title} — Kim's World`,
     description: article.teaser,
+    authors: [{ name: "Kim" }],
+    openGraph: {
+      type: "article",
+      title: article.title,
+      description: article.teaser,
+      url: `https://kimsworld.com/thinking-about/${slug}/`,
+      publishedTime: article.date,
+      authors: ["Kim"],
+      tags: article.tags,
+    },
   };
 }
 
@@ -36,9 +46,32 @@ export default async function ArticlePage({
 
   if (!article) notFound();
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.teaser,
+    datePublished: article.date,
+    dateModified: article.date,
+    url: `https://kimsworld.com/thinking-about/${article.slug}/`,
+    author: {
+      "@type": "Person",
+      "@id": "https://kimsworld.com/#kim",
+      name: "Kim",
+    },
+    publisher: {
+      "@id": "https://kimsworld.com/#website",
+    },
+    keywords: article.tags.join(", "),
+  };
+
   return (
     <main id="main-content" className="min-h-screen bg-[var(--semantic-background)] text-[var(--semantic-text)] px-6 py-10 sm:py-14">
       <article className="mx-auto w-full max-w-2xl">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        />
         <nav aria-label="Breadcrumb" className="mb-8">
           <Link
             href="/thinking-about"

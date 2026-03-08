@@ -4,148 +4,116 @@ import * as React from "react";
 import { Adamina } from "next/font/google";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
-import { IllustrationSpot } from "@/components/illustrations/IllustrationSpot";
 import { TorchCursor } from "@/components/features/TorchCursor";
 
 const adamina = Adamina({ weight: "400", subsets: ["latin"], display: "swap" });
 
-const ILL_WIDTH = 480;
-const ILL_ASPECT = 0.625;
-/** Explicit width for intro illustrations — prevents collapsing to small size */
-const INTRO_ILL_WIDTH = "min(640px, 55vw)";
+type SceneIllustration = {
+  name: string;
+  x: string;
+  y: string;
+  widthVw: number;
+  rotation?: number;
+  aspect: number;
+};
 
-type TextPosition =
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right"
-  | "center";
-
-type SceneColumn = {
-  illustration: string;
-  textsAbove: string[];
-  textsBelow: string[];
+type TextNode = {
+  text: string;
+  left: string;
+  top: string;
 };
 
 type Scene = {
   id: string;
-  columns: SceneColumn[];
-  centerText?: string;
-  textPositions?: TextPosition[];
-};
-
-const PADDING = "5vw";
-
-const positionStyles: Record<
-  TextPosition,
-  React.CSSProperties
-> = {
-  "top-left": { top: PADDING, left: PADDING, textAlign: "left" },
-  "top-right": { top: PADDING, right: PADDING, textAlign: "right" },
-  "bottom-left": { bottom: PADDING, left: PADDING, textAlign: "left" },
-  "bottom-right": { bottom: PADDING, right: PADDING, textAlign: "right" },
-  center: {
-    left: "50%",
-    bottom: PADDING,
-    textAlign: "center",
-  },
+  illustrations: SceneIllustration[];
+  textNodes: TextNode[];
 };
 
 const scenes: Scene[] = [
   {
     id: "void",
-    columns: [
-      {
-        illustration: "origin-scene-01",
-        textsAbove: [
-          "Before language.",
-          "Before cities.",
-          "Before everything we call civilisation\u00a0— there was darkness.",
-        ],
-        textsBelow: [
-          "Until one night, it started with a spark.",
-        ],
-      },
+    illustrations: [
+      { name: "origin-scene-01", x: "45vw", y: "42vh", widthVw: 40, rotation: -16.57, aspect: 0.602 },
     ],
-    textPositions: ["top-left", "top-right", "bottom-left", "bottom-right"],
+    textNodes: [
+      { text: "Before language.", left: "18vw", top: "22vh" },
+      { text: "Before cities.", left: "68vw", top: "38vh" },
+      { text: "Before everything we call civilisation\u00a0— there was darkness.", left: "18vw", top: "56vh" },
+      { text: "Until one night, it started with a spark \uD83D\uDD25", left: "68vw", top: "82vh" },
+    ],
   },
   {
     id: "fire",
-    columns: [
-      {
-        illustration: "scene-2a",
-        textsAbove: ["Fire made the night survivable."],
-        textsBelow: [],
-      },
-      {
-        illustration: "scene-2b",
-        textsAbove: [
-          "It was an innovation\u00a0— a spark that set human evolution in motion.",
-        ],
-        textsBelow: [],
-      },
+    illustrations: [
+      { name: "scene-2a", x: "-13vw", y: "-10vh", widthVw: 76, aspect: 0.590 },
+      { name: "scene-2b", x: "44vw", y: "25vh", widthVw: 62, rotation: 2.47, aspect: 0.625 },
     ],
-    textPositions: ["top-left", "top-right"],
+    textNodes: [
+      { text: "Fire made the night survivable.", left: "16vw", top: "44vh" },
+      { text: "It was an innovation\u00a0— a spark that set human evolution in motion.", left: "57vw", top: "73vh" },
+    ],
   },
   {
     id: "gathering",
-    columns: [
-      {
-        illustration: "scene-3a",
-        textsAbove: ["Fire pulled us into circles and formed communities."],
-        textsBelow: [],
-      },
-      {
-        illustration: "scene-3b",
-        textsAbove: [
-          "By firelight we told our first stories and passed down thousands more.",
-        ],
-        textsBelow: [],
-      },
+    illustrations: [
+      { name: "scene-3a", x: "0", y: "9vh", widthVw: 44, aspect: 0.629 },
+      { name: "scene-3b", x: "45vw", y: "28vh", widthVw: 54, aspect: 0.625 },
     ],
-    textPositions: ["top-left", "top-right"],
+    textNodes: [
+      { text: "Fire pulled us into circles and formed communities.", left: "11vw", top: "45vh" },
+      { text: "By firelight we told our first stories and passed down thousands more.", left: "54vw", top: "74vh" },
+    ],
   },
   {
     id: "chain",
-    columns: [
-      {
-        illustration: "scene-4a",
-        textsAbove: [
-          "Every maker and storyteller since has been passing the fire forward.",
-        ],
-        textsBelow: [],
-      },
-      {
-        illustration: "scene-4b",
-        textsAbove: [
-          "New tools, new problems, new ways of telling the story.",
-        ],
-        textsBelow: [],
-      },
+    illustrations: [
+      { name: "scene-4a", x: "-24vw", y: "20vh", widthVw: 94, aspect: 0.626 },
+      { name: "scene-4b", x: "46vw", y: "20vh", widthVw: 46, aspect: 0.354 },
     ],
-    centerText:
-      "But the same ancient instinct. Make something, share it, keep the fire alive.",
-    textPositions: ["top-left", "top-right", "center"],
+    textNodes: [
+      { text: "Every maker and storyteller since has been passing the fire forward.", left: "16vw", top: "20vh" },
+      { text: "New tools, new problems, new ways of telling the story.", left: "57vw", top: "41vh" },
+      { text: "But the same ancient instinct. Make something, share it, keep the fire alive.", left: "16vw", top: "74vh" },
+    ],
   },
 ];
 
-function countTexts(scene: Scene): number {
-  let n = 0;
-  for (const col of scene.columns) {
-    n += col.textsAbove.length + col.textsBelow.length;
-  }
-  if (scene.centerText) n++;
-  return n;
-}
+// All illustration files are 2880×1800px Procreate exports.
+// The drawings occupy only part of the canvas — transparent padding fills the rest.
+// We use object-fit: cover with the Pencil rectangle aspect ratio to replicate
+// Pencil's "fill" mode: crops the image to fill the container, showing only content.
+function SceneIllustrationEl({ ill }: { ill: SceneIllustration }) {
+  const [src, setSrc] = React.useState<string | null>(null);
 
-const textClass =
-  "absolute max-w-[18rem] text-base font-medium leading-relaxed tracking-wide sm:max-w-xs sm:text-lg";
+  React.useEffect(() => {
+    // scene-4b is a .gif; all others are .png
+    const ext = ill.name === "scene-4b" ? "gif" : "png";
+    setSrc(`/illustrations/${ill.name}.${ext}`);
+  }, [ill.name]);
 
-function getTextPosition(
-  scene: Scene,
-  idx: number
-): TextPosition {
-  return scene.textPositions?.[idx] ?? "center";
+  if (!src) return null;
+
+  return (
+    <div
+      className="pointer-events-none absolute overflow-hidden"
+      style={{
+        left: ill.x,
+        top: ill.y,
+        width: `${ill.widthVw}vw`,
+        // Height derived from Pencil rectangle aspect ratio so cover-crop matches design
+        height: `${ill.widthVw * ill.aspect}vw`,
+        transform: ill.rotation ? `rotate(${ill.rotation}deg)` : undefined,
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt=""
+        aria-hidden="true"
+        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+      />
+    </div>
+  );
 }
 
 function SceneSection({
@@ -160,7 +128,7 @@ function SceneSection({
   const sectionRef = React.useRef<HTMLElement>(null);
   const [visibleCount, setVisibleCount] = React.useState(0);
 
-  const totalTexts = countTexts(scene);
+  const totalTexts = scene.textNodes.length;
 
   React.useEffect(() => {
     const el = sectionRef.current;
@@ -179,100 +147,55 @@ function SceneSection({
     setVisibleCount((prev) => Math.max(prev, count));
   }, [scrollTop, totalTexts]);
 
-  let runningIdx = 0;
-
-  const allTexts: string[] = [];
-  for (const col of scene.columns) {
-    allTexts.push(...col.textsAbove, ...col.textsBelow);
-  }
-  if (scene.centerText) allTexts.push(scene.centerText);
-
-  function renderText(text: string) {
-    const idx = runningIdx++;
-    const isVisible = idx < visibleCount;
-    const isNewest = isVisible && idx === visibleCount - 1;
-    const pos = getTextPosition(scene, idx);
-    const centerOffset = pos === "center" ? { x: "-50%" as const } : {};
-
-    return (
-      <motion.p
-        key={`${scene.id}-t${idx}`}
-        className={textClass}
-        style={{
-          color: "var(--color-cream)",
-          fontFamily: adamina.style.fontFamily,
-          ...positionStyles[pos],
-        }}
-        animate={
-          !isVisible
-            ? { opacity: 0, y: 6, ...centerOffset }
-            : isNewest && !reduceMotion
-              ? {
-                  opacity: 1,
-                  y: 0,
-                  ...centerOffset,
-                  textShadow: [
-                    "0 0 32px rgba(233,196,106,0.6)",
-                    "0 0 24px rgba(233,196,106,0.3)",
-                  ],
-                }
-              : {
-                  opacity: 1,
-                  y: 0,
-                  ...centerOffset,
-                  textShadow: "0 0 24px rgba(233,196,106,0.3)",
-                }
-        }
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
-        {text}
-      </motion.p>
-    );
-  }
-
-  const isDual = scene.columns.length > 1;
-  const illMaxWidth = isDual ? "40vw" : "50vw";
-
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-[60vh] flex-col items-center justify-center gap-6 px-6 py-14"
+      className="relative min-h-[100svh] overflow-hidden"
     >
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-      >
-        {allTexts.map((t) => renderText(t))}
-      </div>
+      {/* Illustrations — absolutely positioned, clipped by overflow-hidden */}
+      {scene.illustrations.map((ill, i) => (
+        <SceneIllustrationEl key={i} ill={ill} />
+      ))}
 
-      <div
-        className={
-          isDual
-            ? "flex w-full max-w-5xl items-start justify-center gap-10 sm:gap-14"
-            : "flex flex-col items-center gap-4"
-        }
-      >
-        {scene.columns.map((col, colIdx) => (
-          <div
-            key={colIdx}
-            className="flex flex-col items-center gap-3"
-            style={{ maxWidth: illMaxWidth }}
+      {/* Texts — absolutely positioned, revealed on scroll */}
+      {scene.textNodes.map((node, idx) => {
+        const isVisible = idx < visibleCount;
+        const isNewest = isVisible && idx === visibleCount - 1;
+
+        return (
+          <motion.p
+            key={`${scene.id}-t${idx}`}
+            className="absolute max-w-[18rem] text-base font-medium leading-relaxed tracking-wide sm:max-w-xs sm:text-lg"
+            style={{
+              color: "var(--color-cream)",
+              fontFamily: adamina.style.fontFamily,
+              left: node.left,
+              top: node.top,
+            }}
+            animate={
+              !isVisible
+                ? { opacity: 0, y: 6 }
+                : isNewest && !reduceMotion
+                  ? {
+                      opacity: 1,
+                      y: 0,
+                      textShadow: [
+                        "0 0 32px rgba(233,196,106,0.6)",
+                        "0 0 24px rgba(233,196,106,0.3)",
+                      ],
+                    }
+                  : {
+                      opacity: 1,
+                      y: 0,
+                      textShadow: "0 0 24px rgba(233,196,106,0.3)",
+                    }
+            }
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <div
-              className="pointer-events-none"
-              style={{ width: INTRO_ILL_WIDTH, minWidth: 280 }}
-            >
-              <IllustrationSpot
-                name={col.illustration}
-                alt=""
-                width={640}
-                height={Math.round(640 * ILL_ASPECT)}
-                breathing={!reduceMotion}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+            {node.text}
+          </motion.p>
+        );
+      })}
     </section>
   );
 }
@@ -328,14 +251,12 @@ export function OriginIntro({ onComplete }: OriginIntroProps) {
     } catch {
       /* localStorage may be unavailable */
     }
-    // BUG 4 fix: signal NavBar to reappear
     window.dispatchEvent(new CustomEvent("introComplete"));
     onComplete();
   }
 
   function handleCTA(e: React.MouseEvent<HTMLButtonElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
-    // BUG 4 fix: mark seen + signal NavBar (was missing from CTA path)
     try {
       localStorage.setItem("hasSeenIntro", "true");
     } catch {

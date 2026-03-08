@@ -1,0 +1,46 @@
+---
+description: General conventions for Kim's World portfolio — naming, RSC defaults, file structure, accessibility. Apply to all TypeScript and TSX files.
+globs: ["**/*.tsx", "**/*.ts"]
+alwaysApply: false
+---
+
+# Portfolio Conventions
+
+Kim's World is a Next.js 15 / React 19 portfolio for Kim, a Principal Product Designer. Warm campfire palette, campfire visual concept, Good UX / Bad UX toggle.
+
+## File & Naming Conventions
+
+- **Components:** PascalCase filenames, one component per file (`Button.tsx`, `NavCard.tsx`)
+- **Routes and content:** kebab-case (`thinking-about/`, `tinkered-and-delivered/`)
+- **CSS variables:** `--{group}-{name}` — e.g. `--color-jade`, `--semantic-primary`, `--font-size-base`
+- **Illustration slots:** kebab-case descriptive names — e.g. `hero-campfire`, `poll-pineapple`
+
+## React Server Components
+
+- **RSC by default.** Only add `"use client"` when the component needs hooks, interactivity, or browser APIs.
+- Keep data fetching server-side where possible.
+
+## Token-First Styling
+
+- Use CSS custom properties from the token system: `bg-[var(--color-cream)]`, `text-[var(--semantic-text)]`
+- **No naked/hardcoded values** — no raw hex, px, or rem values that aren't from tokens
+- Token source of truth: `tokens/tokens.json` → `npm run build:tokens` → `app/globals.css`
+- **NEVER edit `app/globals.css` directly**
+
+## Accessibility
+
+- Semantic HTML (headings, landmarks, lists)
+- ARIA labels on all interactive elements
+- Keyboard navigation for all interactive elements
+- Visible, styled focus indicators
+- WCAG AA colour contrast
+
+## Folder Responsibilities
+
+```
+app/                  # Pages only — no business logic
+components/ui/        # Primitives (Button, Card, NavCard…)
+components/features/  # Feature components (PollGame, UXToggle…)
+lib/hooks/            # useAudio, useUXMode, useScrollReveal
+lib/utils/            # Pure helpers
+```

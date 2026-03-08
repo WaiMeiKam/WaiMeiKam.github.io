@@ -1,6 +1,8 @@
 import * as React from "react";
 
 import { cx } from "@/lib/utils/cx";
+import { IllustrationSpot } from "@/components/illustrations/IllustrationSpot";
+import { UXDemoBox } from "@/components/features/UXDemoBox";
 
 export function Callout({ children }: { children: React.ReactNode }) {
   return (
@@ -52,6 +54,37 @@ export function SectionLabel({ children }: { children: React.ReactNode }) {
     <p className="mb-3 mt-10 text-xs font-semibold uppercase tracking-widest text-[var(--semantic-primary)] opacity-80">
       {children}
     </p>
+  );
+}
+
+export function ArticleIllustration({
+  name,
+  alt,
+  caption,
+  width = 800,
+  height = 400,
+}: {
+  name: string;
+  alt?: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+}) {
+  return (
+    <figure className="my-8">
+      <IllustrationSpot
+        name={name}
+        alt={alt ?? ""}
+        width={width}
+        height={height}
+        breathing={false}
+      />
+      {caption && (
+        <figcaption className="mt-2 text-center text-sm opacity-60">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
   );
 }
 
@@ -148,4 +181,6 @@ export const mdxComponents = {
   KeyInsight,
   SectionLabel,
   ArticleImage,
+  ArticleIllustration,
+  UXDemoBox,
 };

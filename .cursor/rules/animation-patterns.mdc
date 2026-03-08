@@ -1,0 +1,72 @@
+---
+description: Animation patterns for Kim's World feature components — Framer Motion conventions, prefers-reduced-motion, easing values, and campfire/ambient motion principles.
+globs: ["components/features/**/*.tsx"]
+alwaysApply: false
+---
+
+# Animation Patterns
+
+## Framer Motion Setup
+
+Import from `"framer-motion"`. Use `motion.*` components for animated elements.
+
+## Always Respect prefers-reduced-motion
+
+```tsx
+import { useReducedMotion } from "framer-motion"
+
+function AnimatedComponent() {
+  const prefersReduced = useReducedMotion()
+
+  return (
+    <motion.div
+      animate={prefersReduced ? {} : { opacity: [0.4, 1, 0.4] }}
+      transition={prefersReduced ? {} : { duration: 3, repeat: Infinity }}
+    />
+  )
+}
+```
+
+Or use CSS media query for purely CSS animations:
+```css
+@media (prefers-reduced-motion: reduce) {
+  .animated { animation: none; }
+}
+```
+
+## Campfire Motion Principles
+
+The site has a **slow, warm, breathing** ambient motion language — not snappy or bouncy.
+
+| Use case | Duration | Easing |
+|---|---|---|
+| Page transitions | 0.4–0.6s | `easeInOut` |
+| Element reveals (scroll) | 0.5–0.8s | `easeOut` |
+| Ambient loops (sparks, glow) | 2–4s | `easeInOut`, repeat `Infinity` |
+| Hover states | 0.15–0.2s | `easeOut` |
+| UX toggle transition | 0.3s | `easeInOut` |
+
+## Scroll Reveal Pattern
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 16 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-10%" }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+/>
+```
+
+## Ambient Loop Pattern (sparks, glow)
+
+```tsx
+<motion.div
+  animate={{ opacity: [0.3, 0.8, 0.3], scale: [1, 1.05, 1] }}
+  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+/>
+```
+
+## GPU Compositing
+
+Prefer animating `opacity`, `transform` (translate, scale, rotate) — these use GPU compositing.
+Avoid animating `width`, `height`, `top`, `left`, `background-color` — these trigger layout/paint.

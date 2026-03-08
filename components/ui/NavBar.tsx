@@ -4,9 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 
-import { UXToggle } from "@/components/features/UXToggle";
 import { cx } from "@/lib/utils/cx";
-import { useUXMode } from "@/lib/hooks/useUXMode";
 import { useIntro } from "@/lib/context/IntroContext";
 
 const LINKS = [
@@ -18,7 +16,6 @@ const LINKS = [
 
 export function NavBar() {
   const pathname = usePathname();
-  const { mode } = useUXMode();
   const { introActive } = useIntro();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -36,56 +33,6 @@ export function NavBar() {
   }, [mobileOpen]);
 
   if (introActive) return null;
-
-  if (mode === "bad") {
-    return (
-      <div className="sticky top-0 z-50">
-        <div className="overflow-hidden bg-[var(--semantic-primary)] text-white">
-          <div className="flex w-[200%] gap-8 whitespace-nowrap px-2 py-1 text-[10px] font-black uppercase tracking-[0.25em]"
-               style={{ animation: "kimsWorldMarquee 8s linear infinite" }}>
-            <span>
-              Principal Product Designer • CLICK HERE • LIMITED TIME OFFER • COOKIE BONUS •
-            </span>
-            <span>
-              Principal Product Designer • CLICK HERE • LIMITED TIME OFFER • COOKIE BONUS •
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between gap-2 bg-white/10 px-2 py-2 text-[var(--semantic-text)] backdrop-blur">
-          <nav aria-label="Mystery meat navigation" className="flex flex-1 gap-2 overflow-x-auto">
-            <Link
-              href="/"
-              className={cx(
-                "grid h-8 w-8 place-items-center rounded bg-black/20 text-xs outline-none",
-                "focus-visible:ring-2 focus-visible:ring-white/60",
-              )}
-              aria-label="Home"
-            >
-              🏠
-            </Link>
-            {LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cx(
-                  "grid h-8 w-8 place-items-center rounded bg-black/20 text-xs outline-none",
-                  pathname === link.href ? "ring-2 ring-white/60" : "opacity-70 hover:opacity-100",
-                  "focus-visible:ring-2 focus-visible:ring-white/60",
-                )}
-                aria-label={link.label}
-                title={link.label}
-              >
-                {link.icon}
-              </Link>
-            ))}
-          </nav>
-
-          <UXToggle size="sm" className="opacity-60 hover:opacity-90" />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-black/5 bg-[color-mix(in_srgb,var(--semantic-background)_75%,white_25%)] backdrop-blur">
@@ -121,8 +68,6 @@ export function NavBar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <UXToggle size="sm" />
-
           <button
             type="button"
             className="sm:hidden inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-full)] bg-black/5 text-[var(--semantic-heading)] outline-none hover:bg-black/10 focus-visible:ring-2 focus-visible:ring-[var(--semantic-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--semantic-background)]"

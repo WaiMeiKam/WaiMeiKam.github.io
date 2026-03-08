@@ -42,9 +42,9 @@
     "tags": ["music"]
   },
   {
-    "id": "peranakan-tiles",
+    "id": "tile-patterns",
     "type": "image",
-    "title": "Peranakan tile patterns in CSS",
+    "title": "Tile patterns in CSS",
     "thumbnail": "noodling-tiles",
     "link": null,
     "x": 650,

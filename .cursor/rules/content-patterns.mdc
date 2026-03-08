@@ -1,0 +1,69 @@
+---
+description: Content file conventions for Kim's World — MDX frontmatter schemas, JSON manifest formats, Australian English, adding new content.
+globs: ["content/**/*.mdx", "content/**/*.json"]
+alwaysApply: false
+---
+
+# Content Patterns
+
+Write in **Australian English**: colour, organisation, behaviour, recognise, catalogue.
+
+## MDX Articles (`content/articles/`)
+
+```yaml
+---
+title: "The Case for Boring UX"
+date: "2025-01-15"
+teaser: "One sentence that makes someone want to read the whole thing."
+tags: ["ux", "design", "product"]
+---
+```
+
+- Route: `/thinking-about/{slug}`
+- Slug = filename without `.mdx`
+- Use `UXDemoBox` for interactive good/bad UX demos within articles
+
+## MDX Case Studies (`content/projects/`)
+
+```yaml
+---
+title: "Project Title"
+role: "Principal Product Designer"
+timeline: "Q3 2024 – Q1 2025"
+company: "Company Name"
+tags: ["product", "design-systems"]
+---
+```
+
+- Route: `/tinkered-and-delivered/{slug}`
+- Only created when the matching entry in `projects.json` has `"locked": false`
+
+## JSON Manifests
+
+### polls.json
+```json
+{ "id": "pineapple", "question": "...", "optionA": "...", "optionB": "...", "kimsAnswer": "a", "quip": "..." }
+```
+
+### noodling.json
+```json
+{ "id": "...", "type": "sticky"|"image"|"video"|"link"|"embed", "x": 0, "y": 0, "rotation": -2, "tags": [] }
+```
+- `"sticky"` adds: `content`, `color` (campfire palette name)
+- `"image"/"video"/"link"` adds: `title`, `thumbnail`, `link`, `width?`
+- `"embed"` adds: `title`, `embedUrl`, `width?`
+
+### projects.json
+```json
+{ "slug": "project-slug", "title": "...", "teaser": "...", "locked": false }
+```
+
+## Adding Content
+
+| Content type | How |
+|---|---|
+| New article | Create MDX in `content/articles/` with required frontmatter |
+| New case study | Add to `projects.json` + create MDX in `content/projects/` |
+| New poll | Add object to `content/polls.json` |
+| New noodling card | Add object to `content/noodling.json` with `x`, `y`, `rotation` |
+| New illustration | Export from Procreate → drop in `public/illustrations/{name}.png` |

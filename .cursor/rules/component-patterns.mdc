@@ -1,0 +1,46 @@
+---
+description: Component architecture patterns for Kim's World — UI primitives vs feature components, UX toggle system, illustration placeholder system, token usage in components.
+globs: ["components/**/*.tsx"]
+alwaysApply: false
+---
+
+# Component Patterns
+
+## ui/ vs features/
+
+| Directory | Purpose | Examples |
+|-----------|---------|---------|
+| `components/ui/` | Stateless primitives, no business logic | `Button`, `Card`, `NavCard`, `ArticleCard` |
+| `components/features/` | Stateful feature components | `PollGame`, `UXToggle`, `NoodlingCanvas` |
+| `components/illustrations/` | `IllustrationSpot` wrapper only | — |
+
+## The UX Toggle System
+
+- `useUXMode` context: exposes `mode` (`"good"` | `"bad"`) and `toggleMode()`
+- **Good UX mode:** warm, crafted default experience
+- **Bad UX mode:** intentionally terrible (Comic Sans, neon, popups, autoplay)
+- Bad UX components live in `components/features/bad-ux/` — mounted/unmounted by context
+- Bad UX tokens come from the `badUx` group in `tokens.json`
+- Toggle transition should be smooth and satisfying
+
+## Illustration Placeholder System
+
+- Use `<IllustrationSpot name="hero-campfire" />` — takes a `name` prop
+- Renders a gradient shimmer until the real asset exists at `/public/illustrations/{name}.png`
+- No code changes needed when the real art drops in — just add the file
+
+## Token Usage in Components
+
+```tsx
+// Correct — uses CSS custom property
+<div className="bg-[var(--color-cream)] text-[var(--semantic-text)]">
+
+// Wrong — naked hardcoded value
+<div className="bg-[#f5e6d0]">
+```
+
+## Framer Motion
+
+- Use for all animations — see `animation-patterns.mdc` for specifics
+- Always wrap animated values with `prefers-reduced-motion` check
+- Import from `"framer-motion"` (not `"motion/react"`)
